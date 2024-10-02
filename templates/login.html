@@ -1,0 +1,93 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f9; /* Light background color */
+            font-family: 'Arial', sans-serif; /* Font family */
+        }
+        .container {
+            background-color: #ffffff; /* White background for the container */
+            padding: 40px; /* Padding for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            margin-top: 100px; /* Top margin */
+            width: 400px; /* Fixed width for the container */
+        }
+        h1 {
+            color: #007bff; /* Primary color for titles */
+            margin-bottom: 30px; /* Space below the title */
+            text-align: center; /* Center text */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Space below form groups */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff; /* Border color for button */
+            transition: background-color 0.3s, border-color 0.3s; /* Transition for hover effect */
+            width: 100%; /* Full width button */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            border-color: #0056b3; /* Darker border on hover */
+        }
+        .alert {
+            margin-top: 10px; /* Space above alerts */
+        }
+        footer {
+            margin-top: 30px; /* Space above the footer */
+            text-align: center; /* Center-align footer text */
+            color: #777; /* Light gray for footer text */
+        }
+        @media (max-width: 400px) {
+            .container {
+                width: 90%; /* Responsive container width */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Admin Login</h1>
+        <form method="POST" class="mt-4">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control", size=32) }}
+                {% for error in form.username.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control", size=32) }}
+                {% for error in form.password.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Acoustics India Private Limited. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

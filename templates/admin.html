@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f9; /* Light background color */
+        }
+        .container-fluid {
+            margin-top: 20px; /* Top margin for the container */
+            padding: 20px; /* Padding for the container */
+            border-radius: 8px; /* Rounded corners */
+            background-color: white; /* White background for the container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        }
+        h1 {
+            margin-bottom: 30px; /* Space below the title */
+            color: #007bff; /* Primary color for the title */
+            background-color: white; /* Background for visibility */
+            position: sticky; /* Makes the title sticky */
+            top: 0; /* Positions the title at the top */
+        }
+        .table-responsive {
+            max-height: 400px; /* Set a maximum height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        .table th {
+            background-color: #007bff; /* Blue background for table headers */
+            color: white; /* White text for table headers */
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #e9ecef; /* Light gray for odd rows */
+        }
+        .table-striped tbody tr:hover {
+            background-color: #d1ecf1; /* Light blue for hover effect */
+        }
+        .logout-button {
+            margin-top: 20px; /* Space above the logout button */
+            font-weight: bold; /* Bold text for the logout button */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center">Customer Feedback</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer Name</th>
+                        <th>Project</th>
+                        <th>Product</th>
+                        <th>AIPL Job Reference</th>
+                        <th>Average Rating</th>
+                        <th>Pre-Order Service</th>
+                        <th>Post-Order Handling</th>
+                        <th>On-Time Delivery</th>
+                        <th>Quality Sustenance</th>
+                        <th>Overall Response</th>
+                        <th>Final Documentation</th>
+                        <th>Appraisal</th>
+                        <th>Standard Compliance</th>  
+                        <th>Date & Time Submitted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feedback in feedbacks %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ feedback.customer_name }}</td>
+                        <td>{{ feedback.project }}</td>
+                        <td>{{ feedback.product }}</td>
+                        <td>{{ feedback.aipl_job_reference }}</td>
+                        <td>{{ feedback.average_rating() | round(2) }}</td>
+                        <td>{{ feedback.pre_order_service }}</td>
+                        <td>{{ feedback.post_order_handling }}</td>
+                        <td>{{ feedback.on_time_delivery }}</td>
+                        <td>{{ feedback.quality_sustenance }}</td>
+                        <td>{{ feedback.overall_response }}</td>
+                        <td>{{ feedback.final_documentation }}</td>
+                        <td>{{ feedback.appraisal }}</td>
+                        <td>{{ feedback.compliance }}</td>
+                        <td>{{ feedback.timestamp}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a href="{{ url_for('export_feedback') }}" class="btn btn-success logout-button">Export to Excel</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger logout-button">Logout</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <footer>
+        <center><p>&copy; 2024 Acoustics India Private Limited. All rights reserved.</p></center>
+    </footer>
+</body>
+</html>

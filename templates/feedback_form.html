@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #f7f9fc; /* Light background color */
+            font-family: Arial, sans-serif; /* Font style */
+        }
+        .container {
+            background-color: white; /* White background for the form */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            padding: 30px; /* Padding for the container */
+            margin-top: 30px; /* Margin from top */
+        }
+        h1 {
+            color: #007bff; /* Primary color for the title */
+            margin-bottom: 30px; /* Space below the title */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Space between form groups */
+        }
+        .form-label {
+            font-weight: bold; /* Bold labels */
+            color: #333; /* Dark color for text */
+        }
+        .alert {
+            margin-top: 10px; /* Space above error messages */
+        }
+        .form-check-inline {
+            margin-right: 15px; /* Space between inline checkboxes */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border: none; /* Remove border */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        footer {
+            margin-top: 30px; /* Margin above footer */
+            padding: 10px; /* Padding for footer */
+            background-color: #f7f9fc; /* Background color for footer */
+            position: relative; /* Positioning for footer */
+        }
+        footer p {
+            margin: 0; /* Remove margin for footer text */
+            color: #555; /* Footer text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Customer Feedback Form</h1>
+        <form method="POST" class="mt-4">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.customer_name.label(class="form-label") }}
+                {{ form.customer_name(class="form-control") }}
+                {% for error in form.customer_name.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.project.label(class="form-label") }}
+                {{ form.project(class="form-control") }}
+                {% for error in form.project.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.product.label(class="form-label") }}
+                {{ form.product(class="form-control") }}
+                {% for error in form.product.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.aipl_job_reference.label(class="form-label") }}
+                {{ form.aipl_job_reference(class="form-control") }}
+                {% for error in form.aipl_job_reference.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.customer_representative.label(class="form-label") }}
+                {{ form.customer_representative(class="form-control") }}
+                {% for error in form.customer_representative.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.designation.label(class="form-label") }}
+                {{ form.designation(class="form-control") }}
+                {% for error in form.designation.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <fieldset class="form-group">
+                <legend>Feedback Ratings</legend>
+                {% for field in [form.pre_order_service, form.post_order_handling, form.on_time_delivery, form.quality_sustenance, form.overall_response, form.final_documentation, form.appraisal, form.compliance] %}
+                    <div class="form-group">
+                        <label>{{ field.label }}</label><br>
+                        {% for option in field %}
+                            <div class="form-check form-check-inline">
+                                {{ option(class="form-check-input") }}
+                                <label class="form-check-label">{{ option.label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.comments.label(class="form-label") }}
+                {{ form.comments(class="form-control", rows=4) }}
+                {% for error in form.comments.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Hidden field to store user's local time -->
+            <input type="hidden" id="localTime" name="localTime">
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+
+    <!-- JavaScript to capture local time -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            // Get the current local time from the user's system
+            var localTime = new Date();
+            
+            // Format it to your desired format, like YYYY-MM-DD HH:MM AM/PM
+            var hours = localTime.getHours();
+            var minutes = localTime.getMinutes();
+            var ampm = hours > 12 ? 'AM' : 'PM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var formattedTime = localTime.getFullYear() + '-' +
+                                (localTime.getMonth() + 1) + '-' +
+                                localTime.getDate() + ' ' +
+                                hours + ':' + minutes + ' ' + ampm;
+            
+            // Set the hidden input value to the formatted local time
+            document.getElementById('localTime').value = formattedTime;
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <footer>
+        <center><p>&copy; 2024 Acoustics India Private Limited. All rights reserved.</p></center>
+    </footer>
+</body>
+</html>

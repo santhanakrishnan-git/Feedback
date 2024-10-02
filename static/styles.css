@@ -1,0 +1,153 @@
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E0E0E0; /* Light gray background for better contrast */
+    color: #333333; /* Dark text for better visibility */
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: #F36B10; /* Orange */
+    color: #FFFFFF; /* White text */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+header h1 {
+    font-size: 2.5em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #007A7A; /* Teal background */
+    text-align: center;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav a {
+    color: #FFFFFF; /* White links */
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #F36B10; /* Orange on hover */
+}
+
+/* Button Styling */
+button, .btn {
+    background-color: #F36B10; /* Orange button */
+    border: none;
+    color: #FFFFFF; /* White text */
+    padding: 12px 25px;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 1.1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #007A7A; /* Teal on hover */
+    color: #FFFFFF;
+}
+
+/* Form Styling */
+form {
+    background-color: #FFFFFF; /* White form background */
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 15px;
+    max-width: 700px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px solid #F36B10; /* Orange border */
+    border-radius: 8px;
+    background-color: #F2F2F2; /* Light gray background */
+    color: #333333; /* Dark text */
+}
+
+input[type="submit"] {
+    background-color: #F36B10; /* Orange button */
+    color: #FFFFFF; /* White text */
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #007A7A; /* Teal on hover */
+}
+
+/* Footer */
+
+footer {
+    background-color: #007A7A; /* Teal background */
+    color: hsl(0, 0%, 100%); /* White text */
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9em;
+    border-top: 5px solid #F36B10; /* Orange accent on top */
+}
+
+/* Image-based Section */
+/*.section-image {
+    background: url('/feedback.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 50px;
+    color: #FFFFFF; /* White text 
+    text-align: center;
+    position: relative;
+}
+
+.section-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability 
+    z-index: -1;
+}
+
+.section-image h2 {
+    font-size: 2.5em;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+} */
+/* Cards for Content Display */
+.card {
+    background-color: #FFFFFF;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
